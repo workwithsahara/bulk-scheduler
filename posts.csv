@@ -1,0 +1,10 @@
+platform,date,time,caption,media_filename,status
+facebook,2026-07-15,09:00,Good morning! Starting the week strong.,media/post1.jpg,pending
+instagram,2026-07-15,09:00,Good morning! Starting the week strong. #motivation,media/post1.jpg,pending
+tiktok,2026-07-15,09:00,Good morning! Starting the week strong.,media/post1.mp4,pending
+facebook,2026-07-15,14:00,Midday check-in with the team.,media/post2.jpg,pending
+instagram,2026-07-15,14:00,Midday check-in with the team. #teamwork,media/post2.jpg,pending
+tiktok,2026-07-15,14:00,Midday check-in with the team.,media/post2.mp4,pending
+facebook,2026-07-15,19:00,Wrapping up the day.,media/post3.jpg,pending
+instagram,2026-07-15,19:00,Wrapping up the day. #dailygrind,media/post3.jpg,pending
+tiktok,2026-07-15,19:00,Wrapping up the day.,media/post3.mp4,pending

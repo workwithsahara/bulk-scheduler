@@ -1,0 +1,40 @@
+name: Bulk Social Scheduler
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"   # runs every 15 minutes, free on GitHub Actions
+  workflow_dispatch: {}       # lets you trigger it manually from the Actions tab
+
+permissions:
+  contents: write             # needed so it can commit updated posts.csv status
+
+jobs:
+  run-scheduler:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - run: pip install requests
+
+      - name: Run scheduler
+        env:
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          FB_PAGE_ACCESS_TOKEN: ${{ secrets.FB_PAGE_ACCESS_TOKEN }}
+          IG_BUSINESS_ID: ${{ secrets.IG_BUSINESS_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
+          GITHUB_REPO: ${{ github.repository }}
+          GITHUB_BRANCH: ${{ github.ref_name }}
+        run: python bulk_scheduler.py
+
+      - name: Commit updated posts.csv
+        run: |
+          git config user.name "bulk-scheduler-bot"
+          git config user.email "actions@github.com"
+          git add posts.csv
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update post statuses [skip ci]"
+          git push
